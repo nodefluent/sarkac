@@ -1,0 +1,25 @@
+{
+  "name": "sarkac",
+  "version": "0.0.1",
+  "description": "Apache Kafka anomaly detection",
+  "scripts": {
+    "start": "TZ='Europe/Berlin' NODE_ENV=production DEBUG=deephack:* node server.js",
+    "fix": "eslint --fix .",
+    "lint": "eslint .",
+    "test": "yarn lint && yarn test:only",
+    "test:only": "TZ='Europe/Berlin' NODE_ENV=test _mocha -R spec --exit --timeout 5000 './test/int/**/*.js'",
+    "qcommit": "git add . && git commit -m 'auto-generated-commit' && git push origin master"
+  },
+  "dependencies": {
+    "bluebird": "~3.5.1",
+    "debug": "~3.1.0",
+    "ioredis": "~3.2.2",
+    "juration": "~0.1.0",
+    "kafka-streams": "~4.4.0",
+    "mongoose": "~5.1.5"
+  },
+  "devDependencies": {
+    "eslint": "~4.19.1",
+    "mocha": "~5.2.0"
+  }
+}
