@@ -4,6 +4,7 @@
   "description": "Apache Kafka anomaly detection",
   "scripts": {
     "start": "TZ='Europe/Berlin' NODE_ENV=production DEBUG=sarkac:* node example/example.js",
+    "start:generate": "TZ='Europe/Berlin' NODE_ENV=production DEBUG=sarkac:* node example/message-generator.js",
     "fix": "eslint --fix .",
     "lint": "eslint .",
     "test": "yarn lint && yarn test:only",
