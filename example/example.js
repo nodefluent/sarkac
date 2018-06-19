@@ -1,6 +1,5 @@
 "use strict";
 
-const Promise = require("bluebird");
 const Sarkac = require("./../index.js");
 
 const config = {
@@ -44,9 +43,7 @@ const config = {
             autoIndex: true,
             reconnectTries: Number.MAX_VALUE,
             reconnectInterval: 500,
-            poolSize: 20,
-            bufferMaxEntries: 0,
-            promiseLibrary: Promise
+            poolSize: 20
         }
     },
     redis: {
@@ -56,10 +53,6 @@ const config = {
         db: 0,
         keyPrefix: "sarkac:"
     },
-    hooks: {
-        beforeMessageProcessing: (message, callback) => { callback(null, message); },
-        beforeAnomalyProduction: (message, callback) => { callback(null, message); }
-    },
     dsl: {
         "test-topic": {
             fields: {
@@ -68,6 +61,15 @@ const config = {
                 }
             }
         }
+    },
+    target: {
+        produceAnomalies: true,
+        topic: "sarkac-detected-anomalies",
+        partitions: 30
+    },
+    hooks: {
+        beforeMessageProcessing: (message, callback) => { callback(null, message); },
+        beforeAnomalyProduction: (message, callback) => { callback(null, message); }
     }
 };
 
@@ -78,4 +80,4 @@ sarkac.on("message", (message) => {/* empty */});
 sarkac.on("error", (error) => console.error(error));
 
 sarkac.analyse().catch((error) => console.error(error));
-setTimeout(sarkac.close, 25000);
+setTimeout(sarkac.close.bind(sarkac), 25000);

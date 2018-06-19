@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Apache Kafka anomaly detection",
   "scripts": {
-    "start": "TZ='Europe/Berlin' NODE_ENV=production DEBUG=deephack:* node server.js",
+    "start": "TZ='Europe/Berlin' NODE_ENV=production DEBUG=sarkac:* node example/example.js",
     "fix": "eslint --fix .",
     "lint": "eslint .",
     "test": "yarn lint && yarn test:only",
