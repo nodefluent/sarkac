@@ -1,7 +1,8 @@
 "use strict";
 
 module.exports = {
-    kafka: {
+    testTopic: "test-topic",
+    kafkaConfig: {
         noptions: {
             "metadata.broker.list": "localhost:9092",
             "group.id": "sarkac-example-group",

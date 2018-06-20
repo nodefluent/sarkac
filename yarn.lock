@@ -892,7 +892,7 @@ murmur2-partitioner@~1.0.0:
   dependencies:
     murmur-hash-js "^1.0.0"
 
-murmurhash@~0.0.2:
+murmurhash@^0.0.2, murmurhash@~0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/murmurhash/-/murmurhash-0.0.2.tgz#6f07bd8a1105e709c26fc89420cb5930c24585fe"
 

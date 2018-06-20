@@ -1,10 +1,10 @@
 "use strict";
 
-const {kafka} = require("./config.js");
+const {kafkaConfig, testTopic} = require("./config.js");
 const Sarkac = require("./../index.js");
 
 const config = {
-    kafka,
+    kafka: kafkaConfig,
     mongo: {
         url: "mongodb://localhost:27017/sarkac_example",
         options: {
@@ -23,10 +23,13 @@ const config = {
         keyPrefix: "sarkac:"
     },
     dsl: {
-        "test-topic": {
+        [testTopic]: {
             fields: {
                 "sub.one": {
-                    windows: ["1m", "15m", "1h", "12h", "2d", "1w"]
+                    windows: ["30s", "1m", "5m", "15m", "1h", "12h", "2d", "1w"]
+                },
+                "two": {
+                    windows: ["30s", "1m", "5m", "15m", "1h", "12h", "2d", "1w"]
                 }
             }
         }
@@ -37,7 +40,21 @@ const config = {
         partitions: 1
     },
     hooks: {
-        beforeMessageProcessing: (message, callback) => { callback(null, message); },
+        beforeMessageProcessing: (message, callback) => {
+            try {
+                message.key = message.key.toString("utf8");
+                message.value = message.value.toString("utf8");
+                message.value = JSON.parse(message.value);
+                callback(null, {
+                    topic: message.topic,
+                    key: message.key,
+                    value: message.value,
+                    timestamp: message.timestamp || Date.now()
+                });
+            } catch(error){
+                return callback(error);
+            }
+        },
         beforeAnomalyProduction: (message, callback) => { callback(null, message); }
     }
 };
@@ -45,7 +62,7 @@ const config = {
 const sarkac = new Sarkac(config);
 
 sarkac.on("anomaly", (anomaly, message) => console.log(anomaly));
-sarkac.on("message", (message) => console.log(message));
+sarkac.on("message", (message) => {/* empty */});
 sarkac.on("error", (error) => console.error(error));
 
 sarkac.analyse().catch((error) => console.error(error));
