@@ -30,9 +30,9 @@ module.exports = {
             "request.required.acks": 1
         },
         batchOptions: {
-            batchSize: 5,
+            batchSize: 500,
             commitEveryNBatch: 1,
             concurrency: 1
         }
-    },
+    }
 };

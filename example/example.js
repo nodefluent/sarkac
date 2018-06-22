@@ -26,10 +26,12 @@ const config = {
         [testTopic]: {
             fields: {
                 "sub.one": {
-                    windows: ["30s", "1m", "5m", "15m", "1h", "12h", "2d", "1w"]
+                    //windows: ["30s", "1m", "5m", "15m", "1h", "12h", "2d", "1w"]
+                    windows: ["1m"]
                 },
                 "two": {
-                    windows: ["30s", "1m", "5m", "15m", "1h", "12h", "2d", "1w"]
+                    //windows: ["30s", "1m", "5m", "15m", "1h", "12h", "2d", "1w"]
+                    windows: ["3m"]
                 }
             }
         }
@@ -56,12 +58,14 @@ const config = {
             }
         },
         beforeAnomalyProduction: (message, callback) => { callback(null, message); }
-    }
+    },
+    anomalyScanMs: 15000,
+    anomalyScanConcurrency: 2
 };
 
 const sarkac = new Sarkac(config);
 
-sarkac.on("anomaly", (anomaly, message) => console.log(anomaly));
+sarkac.on("anomaly", (anomaly) => console.log(anomaly));
 sarkac.on("message", (message) => {/* empty */});
 sarkac.on("error", (error) => console.error(error));
 
