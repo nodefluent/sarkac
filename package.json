@@ -17,13 +17,13 @@
     "debug": "~3.1.0",
     "ioredis": "~3.2.2",
     "juration": "~0.1.0",
-    "kafka-streams": "~4.4.0",
-    "mongoose": "~5.1.5",
+    "kafka-streams": "~4.5.0",
+    "mongoose": "~5.1.7",
     "murmurhash": "~0.0.2",
-    "sinek": "~6.17.0"
+    "sinek": "~6.18.0"
   },
   "devDependencies": {
-    "eslint": "~4.19.1",
+    "eslint": "~5.0.1",
     "mocha": "~5.2.0"
   }
 }

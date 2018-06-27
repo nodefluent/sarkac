@@ -60,7 +60,11 @@ const config = {
         beforeAnomalyProduction: (message, callback) => { callback(null, message); }
     },
     anomalyScanMs: 15000,
-    anomalyScanConcurrency: 2
+    anomalyScanConcurrency: 2,
+    discovery: {
+        enabled: true,
+        scanMs: 15000
+    }
 };
 
 const sarkac = new Sarkac(config);
