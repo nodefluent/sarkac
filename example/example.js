@@ -63,7 +63,8 @@ const config = {
     anomalyScanConcurrency: 2,
     discovery: {
         enabled: true,
-        scanMs: 15000
+        scanMs: 15000,
+        fieldScanMs: 30000
     }
 };
 
