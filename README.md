@@ -1,5 +1,5 @@
 # sarkac
 
-Apache Kafka anomaly detection
+Apache Kafka message payloads anomaly detection
 
 WIP

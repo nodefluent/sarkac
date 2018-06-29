@@ -22,7 +22,7 @@ const config = {
         db: 0,
         keyPrefix: "sarkac:"
     },
-    dsl: {
+    /* dsl: { // optional if discovery is used (though still useable, as basis)
         [testTopic]: {
             fields: {
                 "sub.one": {
@@ -35,44 +35,70 @@ const config = {
                 }
             }
         }
-    },
+    }, */
     target: {
         produceAnomalies: true,
         topic: "sarkac-detected-anomalies",
         partitions: 1
     },
     hooks: {
-        beforeMessageProcessing: (message, callback) => {
+        beforeMessageProcessing: (_message, callback) => {
+
             try {
-                message.key = message.key.toString("utf8");
-                message.value = message.value.toString("utf8");
-                message.value = JSON.parse(message.value);
-                callback(null, {
-                    topic: message.topic,
-                    key: message.key,
-                    value: message.value,
-                    timestamp: message.timestamp || Date.now()
+
+                const message = {};
+                message.key = _message.key.toString("utf8");
+                message.value = JSON.parse(_message.value.toString("utf8"));
+                message.timestamp = _message.timestamp || Date.now();
+                message.topic = _message.topic;
+
+                // these fields are mandatory!
+                // if you do not provide them, you will have a bad time
+
+                // fake async
+                process.nextTick(() => {
+                    callback(null, message);
                 });
+
             } catch(error){
-                return callback(error);
+
+                // could also pass original message here
+                // return callback(null, _message);
+
+                // could also pass error here
+                // return callback(error);
+
+                // filter out errored hook handles by passing null
+                return callback(null, null);
             }
         },
-        beforeAnomalyProduction: (message, callback) => { callback(null, message); }
+        beforeAnomalyProduction: (message, callback) => { callback(null, message); },
+        //beforeDiscoveryFieldConfig: (topic, field, callback) => { callback(null, {windows: ["3m"]}); }
     },
     anomalyScanMs: 15000,
     anomalyScanConcurrency: 2,
     discovery: {
         enabled: true,
         scanMs: 15000,
-        fieldScanMs: 30000
+        fieldScanMs: 30000,
+        defaultWindows: ["3m"],
+        topicBlacklist: [] // target.topic and __consumer_offsets is added automatically
+    },
+    http: {
+        enabled: true,
+        port: 8033
     }
 };
 
 const sarkac = new Sarkac(config);
 
 sarkac.on("anomaly", (anomaly) => console.log(anomaly));
-sarkac.on("message", (message) => {/* empty */});
 sarkac.on("error", (error) => console.error(error));
+
+/* further misc events you can subscribe to */
+sarkac.on("message", (message) => {});
+sarkac.on("discovered-topics", (topics) => {});
+sarkac.on("discovered-fields", (topic, fields) => {});
 
 sarkac.analyse().catch((error) => console.error(error));
 //setTimeout(sarkac.close.bind(sarkac), 25000);
