@@ -1,6 +1,6 @@
 <h1 align="center">sarkac</h1>
 <p align="center">
-  <img alt="sarkac" src="553px-Empirical_rule_histogram.svg.png" width="362">
+  <img alt="sarkac" src="sigma.png" width="332">
 </p>
 <p align="center">
   Apache Kafka topic and message anomaly detection with automated discovery.
@@ -10,7 +10,7 @@
 
 ## Install
 
-Very simple via `yarn add sarkac`s
+Very simple via `yarn add sarkac`
 
 ## Setup
 
