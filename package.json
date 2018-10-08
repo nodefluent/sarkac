@@ -1,7 +1,7 @@
 {
   "name": "sarkac",
-  "version": "0.10.0",
-  "description": "Apache Kafka message payloads anomaly detection",
+  "version": "0.11.0",
+  "description": "Apache Kafka topic and message anomaly detection with automated discovery",
   "scripts": {
     "start": "TZ='Europe/Berlin' NODE_ENV=production DEBUG=sarkac:* node example/example.js",
     "produce": "TZ='Europe/Berlin' NODE_ENV=production DEBUG=sarkac:* node example/produceExampleMessages.js",
@@ -13,20 +13,34 @@
   },
   "dependencies": {
     "async": "~2.6.1",
-    "bluebird": "~3.5.1",
+    "bluebird": "~3.5.2",
     "body-parser": "~1.18.3",
     "cors": "v2.8.4",
-    "debug": "~3.1.0",
+    "debug": "~4.0.1",
     "express": "~4.16.3",
     "juration": "~0.1.0",
-    "kafka-streams": "~4.5.0",
-    "mongoose": "~5.1.7",
+    "kafka-streams": "~4.6.3",
+    "memory-cache": "^0.2.0",
+    "mongoose": "~5.3.2",
     "murmurhash": "~0.0.2",
-    "sinek": "~6.18.0"
+    "sinek": "~6.22.3"
   },
   "devDependencies": {
-    "eslint": "~5.0.1",
+    "eslint": "~5.6.1",
     "mocha": "~5.2.0",
-    "request": "~2.87.0"
-  }
+    "request": "~2.88.0"
+  },
+  "keywords": [
+    "apache",
+    "kafka",
+    "topic",
+    "message",
+    "field",
+    "anomaly",
+    "detection",
+    "discovery",
+    "auto",
+    "automated",
+    "sigma"
+  ]
 }

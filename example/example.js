@@ -1,6 +1,6 @@
 "use strict";
 
-const {kafkaConfig, testTopic} = require("./config.js");
+const {kafkaConfig} = require("./config.js");
 const Sarkac = require("./../index.js");
 
 const config = {
@@ -98,6 +98,8 @@ sarkac.on("error", (error) => console.error(error));
 /* further misc events you can subscribe to */
 sarkac.on("message", (message) => {});
 sarkac.on("discovered-topics", (topics) => {});
+sarkac.on("created-topics", (topics) => {});
+sarkac.on("deleted-topics", (topics) => {});
 sarkac.on("discovered-fields", (topic, fields) => {});
 
 sarkac.analyse().catch((error) => console.error(error));
