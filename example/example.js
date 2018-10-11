@@ -1,6 +1,6 @@
 "use strict";
 
-const {kafkaConfig} = require("./config.js");
+const {kafkaConfig} = require("./kafkaConfig.js");
 const Sarkac = require("./../index.js");
 
 const config = {
@@ -22,7 +22,8 @@ const config = {
         db: 0,
         keyPrefix: "sarkac:"
     },
-    /* dsl: { // optional if discovery is used (though still useable, as basis)
+    // optional, if discovery is not used
+    /* dsl: {
         [testTopic]: {
             fields: {
                 "sub.one": {
@@ -75,6 +76,10 @@ const config = {
         beforeAnomalyProduction: (message, callback) => { callback(null, message); },
         //beforeDiscoveryFieldConfig: (topic, field, callback) => { callback(null, {windows: ["3m"]}); }
     },
+    http: {
+        enabled: true,
+        port: 8033
+    },
     anomalyScanMs: 15000,
     anomalyScanConcurrency: 2,
     discovery: {
@@ -84,10 +89,11 @@ const config = {
         defaultWindows: ["3m"],
         topicBlacklist: [] // target.topic and __consumer_offsets is added automatically
     },
-    http: {
-        enabled: true,
-        port: 8033
-    }
+
+    // optional
+    freqAnomalyDetectionActive: true,
+    freqFieldName: "__topic_frequency",
+    freqWindows: ["15m", "12h", "1d"],
 };
 
 const sarkac = new Sarkac(config);

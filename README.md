@@ -16,6 +16,7 @@ Very simple via `yarn add sarkac`
 
 Basically you can create your own apps with sarkac or integrate it in your existing apps,
 however you can also simply just spin up an instance by providing it some simple configuration info.
+**Please note:** that sarkac requires [MongoDB](https://www.mongodb.com/de) :seedling: to store its windows.
 
 You can find an example [here](example/example.js).
 

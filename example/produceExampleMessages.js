@@ -1,9 +1,9 @@
 "use strict";
 
 const debug = require("debug")("sarkac:example:generator");
-const {KafkaStreams} = require("kafka-streams");
+const { KafkaStreams } = require("kafka-streams");
 
-const {kafkaConfig, testTopic} = require("./config.js");
+const { kafkaConfig, testTopic } = require("./kafkaConfig.js");
 const streams = new KafkaStreams(kafkaConfig);
 
 const stream = streams.getKStream();
